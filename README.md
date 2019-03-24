@@ -29,4 +29,4 @@ desafiobackend
 
 4 - após a conclusão do processo de importação, você poderá acessar a aplicação na url [`http://127.0.0.1:8883/admin/`](http://127.0.0.1:8883/admin/);
 
-Obs: o arquivo users.csv está com apenas 200 linhas, é necessário baixar o original ( [https://s3.amazonaws.com/careers-picpay/users.csv.gz](users.csv.gz) ) e subsitituir na pasta data, antes de executar o passo item 3;
+Obs: o arquivo users.csv está com apenas 200 linhas, é necessário baixar o original [users.csv.gz], descompactar e subsitituir na pasta data, antes de executar o passo item 3;
