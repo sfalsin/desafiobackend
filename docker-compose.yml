@@ -1,0 +1,52 @@
+version: '3'
+services:
+
+  postgresql_teste:
+    container_name: postgresql_teste
+    restart: always
+    image: obytes/postgresql-9.6
+    ports:
+      - "5433:5432"
+    environment:
+      - DEBUG=false
+      - PG_PASSWORD=postgres
+      - PG_USER=postgres
+      - PG_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - PG_MIN_WAL_SIZE=1GB
+      - PG_MAX_WAL_SIZE=4GB
+    volumes:
+      - ${PWD}/data:/tmp
+      - ${PWD}/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+        default:
+            aliases:
+                - postgresql_teste.local
+
+  application:
+    container_name: application
+    image: sfalsin/application:latest
+    #build: ./application
+    depends_on:
+      - postgresql_teste
+    tty: true
+    stdin_open: true
+    restart: always
+    environment:
+      - DATABASE_HOST=postgresql_teste
+      - DATABASE_PORT=5432
+    expose:
+      - "8883"
+    ports:
+      - "8883:8883"
+    working_dir: /application
+    command: python ./manage.py runserver 0.0.0.0:8883
+    networks:
+        default:
+            aliases:
+                - application.local          
+
+networks:
+    default:
