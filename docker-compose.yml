@@ -48,5 +48,27 @@ services:
             aliases:
                 - application.local          
 
+  restapi:
+    container_name: restapi
+    image: sfalsin/restapi:latest
+    depends_on:
+      - postgresql_teste
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    restart: always
+    environment:
+      - DATABASE_HOST=postgresql_teste
+      - DATABASE_PORT=5432
+    expose:
+      - "8884"
+    ports:
+      - "8884:8884"
+    networks:
+        default:
+            aliases:
+                - restapi.local
+
 networks:
     default:

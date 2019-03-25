@@ -1,0 +1,24 @@
+server.port: 8884
+
+spring:
+  data:
+    rest:
+      basePath: /api
+  hateoas.use-hal-as-default-json-media-type: false
+  jackson.default-property-inclusion: NON_NULL
+  datasource:
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
+    #url: jdbc:postgresql://${database.host}:${database.port}/postgres
+    url: ${database.url}
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 2
+      connection-init-sql: SELECT 1
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        temp.use_jdbc_metadata_defaults: false
+
